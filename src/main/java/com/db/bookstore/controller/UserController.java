@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class UserController {
     @Autowired
@@ -34,14 +37,28 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView verifyUser(User user){
+    public ModelAndView verifyUser(User user, HttpServletResponse response){
         try {
-            userService.findByUsernameOrEmailAndPassword(user);
+            User user1 = userService.findByUsernameOrEmailAndPassword(user);
+            response.addCookie(new Cookie("id", "" + user1.getId()));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         ModelAndView modelAndView = new ModelAndView("redirect:/dashboard");
+
         return modelAndView;
+
+
+
     }
+
+    @GetMapping("/dashboard")
+    public ModelAndView getDashBoard(){
+        ModelAndView modelAndView=new ModelAndView("dashboard");
+        modelAndView.addObject("bookList","")
+    }
+
+
 
 }
