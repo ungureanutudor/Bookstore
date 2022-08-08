@@ -56,7 +56,8 @@ public class UserController {
     @GetMapping("/dashboard")
     public ModelAndView getDashBoard(){
         ModelAndView modelAndView=new ModelAndView("dashboard");
-        modelAndView.addObject("bookList","")
+        modelAndView.addObject("bookList","");
+        return modelAndView;
     }
 
 
