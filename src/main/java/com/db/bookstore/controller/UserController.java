@@ -23,7 +23,24 @@ public class UserController {
     @PostMapping("/register")
     public ModelAndView addUser(User user){
         userService.insertUser(user);
+        ModelAndView modelAndView = new ModelAndView("redirect:/login");
+        return modelAndView;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView getLoginForm(){
         ModelAndView modelAndView = new ModelAndView("login-form");
+        return modelAndView;
+    }
+
+    @PostMapping("/login")
+    public ModelAndView verifyUser(User user){
+        try {
+            userService.findByUsernameOrEmailAndPassword(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        ModelAndView modelAndView = new ModelAndView("redirect:/dashboard");
         return modelAndView;
     }
 
