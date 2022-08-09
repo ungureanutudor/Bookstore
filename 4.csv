@@ -1,0 +1,5 @@
+id,email,name,password,role,username
+1,gigel@yahoo.com,Gigel,parola1,admin,gigel1
+2,ana@yahoo.com,anaa,ana123,client,ana
+3,alex@yahoo.com,Alexx,alex1,client,alex
+4,maria@yahoo.com,Mary,maria0,client,Maria

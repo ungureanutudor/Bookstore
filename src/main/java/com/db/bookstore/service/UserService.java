@@ -13,6 +13,7 @@ public class UserService {
     UserRepository userRepository;
 
     public void insertUser(User user){
+        user.setRole("client");
         userRepository.save(user);
     }
     public User findByUsernameOrEmailAndPassword(User user) throws Exception {
@@ -36,6 +37,16 @@ public class UserService {
         return null;
     }
 
+    public User findUserById(int id) {
+        User user1 = userRepository.findUserById(id);
+        return user1;
+    }
 
+    public Boolean verifyStatus(int id) {
+        User user1 = userRepository.findUserById(id);
+        if (user1.getRole() == "admin") {
+            return true;
+        } else return false;
+    }
 
 }
